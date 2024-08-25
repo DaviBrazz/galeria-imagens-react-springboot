@@ -4,6 +4,7 @@ package com.example.galeria.domain.entity;
 import com.example.galeria.domain.enums.ImageExtension;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
