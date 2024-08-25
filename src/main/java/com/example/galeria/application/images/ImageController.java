@@ -25,7 +25,7 @@ public class ImageController {
             @RequestParam("name") String name,
             @RequestParam ("tags")List<String> tags) {
 
-        log.info("------ IMAGEM RECEBIDA ------ ");
+        log.info("------ IMAGEM RECEBIDA 9------ ");
         log.info("name: {}, size: {}", file.getOriginalFilename(), file.getSize());
         log.info("Nome definido para imagem: {}", name);
         log.info("Tags: {}", tags);
