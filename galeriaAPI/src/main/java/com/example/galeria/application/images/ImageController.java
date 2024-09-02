@@ -24,6 +24,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/images")
 @Slf4j
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class ImageController {
 
    private final ImageService imageService;
