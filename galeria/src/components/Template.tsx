@@ -1,19 +1,18 @@
 interface TemplateProps {
-    children: React.ReactNode
+    children: React.ReactNode;
 }
 
 export const Template: React.FC<TemplateProps> = (props: TemplateProps) => {
     return (
-        <>
+        <div className="flex flex-col min-h-screen">
             <Header />
-             <div className="container mx-auto mt-8 px-4"> 
-            {props.children}
-            </div>
-
+            <main className="flex-1 container mx-auto mt-8 px-4">
+                {props.children}
+            </main>
             <Footer />
-        </>
-    )
-}
+        </div>
+    );
+};
 
 const Header: React.FC = () => {
     return (
@@ -21,11 +20,9 @@ const Header: React.FC = () => {
             <div className="container mx-auto flex justify-between items-center px-4">
                 <h1 className="text-3xl font-bold">Galeria</h1>
             </div>
-
-
         </header>
-    )
-}
+    );
+};
 
 const Footer: React.FC = () => {
     return (
@@ -33,7 +30,6 @@ const Footer: React.FC = () => {
             <div className="container mx-auto text-center">
                 Desenvolvido por Davi Braz
             </div>
-
         </footer>
-    )
-}
+    );
+};
