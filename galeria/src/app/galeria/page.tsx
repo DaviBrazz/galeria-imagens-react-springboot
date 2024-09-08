@@ -54,9 +54,9 @@ export default function GaleriaPage() {
 
                     </select>
 
-                    <Button style='bg-blue-500  hover:bg-blue-300' label='Search' onClick={searchImages}/>
+                    <Button style='bg-blue-500  hover:bg-blue-300' label='Buscar' onClick={searchImages}/>
                     <Link href= "/formulario">
-                    <Button style='bg-yellow-500  hover:bg-yellow-300' label='Adicionar Nova'/>
+                    <Button style='bg-green-500  hover:bg-green-300' label='Adicionar Nova'/>
                     </Link>
 
 
