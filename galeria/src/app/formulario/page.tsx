@@ -5,7 +5,6 @@ import Link from 'next/link'
 export default function Home() {
   return (
     <Template>
-      <h1 className="text-black">Formulário</h1>
       <section className='flex flex-col items-center justify-center my-5'>
         <h5 className='mt-3 mb-10 text-3xl font-extrabold tracking-tight text-gray-900'>Nova Imagem</h5>
         <form >
