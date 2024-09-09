@@ -63,7 +63,7 @@ const Header: React.FC = () => {
 
 const Footer: React.FC = () => {
     return (
-        <footer className="bg-sky-950 text-white py-4 text-sm text-center">
+        <footer className="bg-sky-950 text-white py-4 mt-8 text-sm text-center">
             <div className="container mx-auto">
                 Desenvolvido por Davi Braz
             </div>

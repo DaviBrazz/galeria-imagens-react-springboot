@@ -63,7 +63,7 @@ export default function GaleriaPage() {
                 </div>
 
             </section>
-            <section className="grid grid-cols-3 gap-8">
+            <section className="grid grid-cols-4 gap-8">
                 {
                     renderImageCards()
                 }
