@@ -8,6 +8,14 @@ class ImageService {
         const response = await fetch(url);
         return await response.json();
     }
+
+     async salvar(dados: FormData) : Promise<string> {
+        const response = await fetch(this.baseURL,  {
+            method: 'POST',
+            body: dados
+        })
+        return response.headers.get('location') ?? ''
+     }
 }
 
 export const useImageService = () => new ImageService();
