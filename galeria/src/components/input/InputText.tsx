@@ -1,14 +1,15 @@
 import React from "react";
 
 interface InputTextProps {
-    style?: string
+    style?: string;
     onChange?:  (event: React.ChangeEvent<HTMLInputElement>) => void
-    placeholder?: string 
+    placeholder?: string ;
+    id?: string;
 }
 
-export const InputText: React.FC<InputTextProps> = ({onChange, style, placeholder} : InputTextProps) => {
+export const InputText: React.FC<InputTextProps> = ({onChange, style, placeholder, id} : InputTextProps) => {
     return (
-        <input type="text" onChange={onChange} className={`${style} border px-3 py-2 rounded-lg text-gray-900`} placeholder={placeholder}/>
+        <input id={id} type="text" onChange={onChange} className={`${style} border px-3 py-2 rounded-lg text-gray-900`} placeholder={placeholder}/>
     )
 
 }
