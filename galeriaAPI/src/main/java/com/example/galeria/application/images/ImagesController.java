@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @RequiredArgsConstructor
 @CrossOrigin("*")
-public class ImageController {
+public class ImagesController {
 
    private final ImageService imageService;
    private final ImageMapper imageMapper;
