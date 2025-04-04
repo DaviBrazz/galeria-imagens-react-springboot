@@ -82,6 +82,17 @@ public class ImagesController {
                 .toUri();
     }
 
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> deleteImage(@PathVariable("id") String id) {
+        var possibleImage = imageService.getById(id);
+        if (possibleImage.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        imageService.deleteImage(id);
+        log.info("Imagem com ID {} foi deletada com sucesso.", id);
+        return ResponseEntity.noContent().build();
+    }
 
 }
 

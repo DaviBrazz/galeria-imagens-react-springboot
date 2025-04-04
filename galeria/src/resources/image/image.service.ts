@@ -1,7 +1,7 @@
 import { Image } from './image.resource'
 
 class ImageService {
-    baseURL: string = 'http://localhost:8080/images';
+    baseURL: string = 'http://192.168.1.7:8080/images';
 
     async buscar(query: string = "", extension: string = ""): Promise<Image[]> {
         const url = `${this.baseURL}?extension=${extension}&query=${query}`;
