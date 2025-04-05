@@ -1,6 +1,8 @@
 'use client'
 
+
 import Link from "next/link";
+import { ToastContainer } from "react-toastify";
 
 interface TemplateProps {
     children: React.ReactNode;
@@ -53,7 +55,7 @@ const Header: React.FC = () => {
     return (
         <header className="bg-sky-950 text-white py-3">
             <div className="container mx-auto flex justify-between items-center px-4">
-                <Link href="./galeria"> 
+                <Link href="./galeria">
                     <h1 className="text-3xl font-bold">Galeria</h1>
                 </Link>
             </div>
@@ -63,10 +65,19 @@ const Header: React.FC = () => {
 
 const Footer: React.FC = () => {
     return (
-        <footer className="bg-sky-950 text-white py-4 mt-8 text-sm text-center">
+        <><footer className="bg-sky-950 text-white py-4 mt-8 text-sm text-center">
             <div className="container mx-auto">
                 Desenvolvido por Davi Braz
             </div>
         </footer>
+            <ToastContainer
+                position="top-right"
+                autoClose={8000}
+                hideProgressBar={false}
+                draggable={false}
+                closeOnClick={true}
+                pauseOnHover={true}
+            />
+        </>
     );
 };
