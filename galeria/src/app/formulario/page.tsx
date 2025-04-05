@@ -3,22 +3,10 @@
 
 import { Button, InputText, Template, RenderIf, useNotification } from '@/components'
 import { useImageService } from '@/resources/image/image.service'
-import Link from 'next/link'
 import { useFormik } from 'formik'
 import { useState } from 'react';
-
-
-interface FormProps {
-  name: string;
-  tags: string;
-  file: any;
-}
-
-const formScheme: FormProps = {
-  name: '',
-  tags: '',
-  file: ''
-}
+import { FormProps, formScheme, formValidationScheme } from './formScheme'
+import Link from 'next/link'
 
 export default function FormularioPage() {
 
@@ -28,7 +16,9 @@ export default function FormularioPage() {
   const service = useImageService();
 
   const formik = useFormik<FormProps>({
-    initialValues: formScheme, onSubmit: handleSubmit
+    initialValues: formScheme,
+    onSubmit: handleSubmit,
+    validationSchema: formValidationScheme
   })
 
   async function handleSubmit(dados: FormProps) {
@@ -65,11 +55,14 @@ export default function FormularioPage() {
         <form onSubmit={formik.handleSubmit}>
           <div className='grid grid-cols-1'>
             <label className='block text-sm font-medium leading-6 text-gray-700'>Nome:   </label>
-            <InputText id="name" onChange={formik.handleChange}  value={formik.values.name} placeholder='Digite o nome da imagem' />
+            <InputText id="name" onChange={formik.handleChange} value={formik.values.name} placeholder='Digite o nome da imagem' />
+            <span className='text-red-600'>{formik.errors.name} </span>
           </div>
+
           <div className='mt-5 grid grid-cols-1'>
             <label className='block text-sm font-medium leading-6 text-gray-700'>Tags:   </label>
-            <InputText id="tags" onChange={formik.handleChange}   value={formik.values.tags} placeholder='Digite o nome das tags' />
+            <InputText id="tags" onChange={formik.handleChange} value={formik.values.tags} placeholder='Digite o nome das tags' />
+            <span className='text-red-600'>{formik.errors.tags} </span>
           </div>
 
           <div className='mt-5 grid grid-cols-1'>
