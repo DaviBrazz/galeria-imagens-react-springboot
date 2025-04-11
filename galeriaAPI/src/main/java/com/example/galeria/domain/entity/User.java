@@ -12,7 +12,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.time.LocalDateTime;
 
 @Entity
-@Table
+@Table(name = "auth_user")
 @EntityListeners(AuditingEntityListener.class)
 @Data
 @NoArgsConstructor
