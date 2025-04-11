@@ -29,6 +29,9 @@ public class User {
     @Column
     private String email;
 
+    @Column
+    private String password;
+
     @CreatedDate
     @Column(name = "created_at")
     private LocalDateTime createdAt;
