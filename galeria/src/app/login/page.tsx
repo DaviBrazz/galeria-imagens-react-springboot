@@ -6,7 +6,7 @@ import { LoginForm, formScheme, validationScheme } from './formSchema'
 import { useFormik } from 'formik'
 import { useAuth } from '@/resources'
 import { useRouter } from 'next/navigation'
-import { AccessToken, Credentials } from '@/resources/user/users.resources'
+import { AccessToken, Credentials, User } from '@/resources/user/users.resources'
 
 export default function login() {
 
@@ -17,7 +17,7 @@ export default function login() {
     const notification = useNotification();
     const router = useRouter();
 
-    const { values, handleChange, handleSubmit, errors } = useFormik<LoginForm>({
+    const { values, handleChange, handleSubmit, errors, resetForm } = useFormik<LoginForm>({
         initialValues: formScheme,
         validationSchema: validationScheme,
         onSubmit: onSubmit
@@ -32,6 +32,22 @@ export default function login() {
             try {
                 const accessToken: AccessToken = await auth.authenticate(credentials);
                 router.push("/galeria")
+            } catch (error: any) {
+                const message = error?.message;
+                notification.notify(message, 'error');
+            }
+        } else {
+            const user: User = {
+                email: values.email,
+                name: values.name,
+                password: values.password
+            }
+
+            try {
+                await auth.save(user);
+                notification.notify('Usuário criado com sucesso!', 'success');
+                resetForm();
+                setNewUserState(false); 
             } catch (error: any) {
                 const message = error?.message;
                 notification.notify(message, 'error');
