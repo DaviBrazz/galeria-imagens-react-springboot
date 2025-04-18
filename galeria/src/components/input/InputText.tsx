@@ -5,12 +5,13 @@ interface InputTextProps {
     onChange?:  (event: React.ChangeEvent<HTMLInputElement>) => void
     placeholder?: string ;
     id?: string;
-    value?: string
+    value?: string;
+    type?: string;
 }
 
-export const InputText: React.FC<InputTextProps> = ({onChange, style, placeholder, id, value} : InputTextProps) => {
+export const InputText: React.FC<InputTextProps> = ({style, type = "text" ,...outrasProps} : InputTextProps) => {
     return (
-        <input id={id}  type="text" onChange={onChange} className={`${style} border px-3 py-2 rounded-lg text-gray-900`} placeholder={placeholder} value={value} autoComplete="off"/>
+        <input type={type} {...outrasProps} className={`${style} border px-3 py-2 rounded-lg text-gray-900}`}/>
     )
 
 }
