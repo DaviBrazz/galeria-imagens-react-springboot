@@ -1,24 +1,43 @@
 'use client'
 
-import { Template, RenderIf, InputText, Button, FieldError } from '@/components'
+import { Template, RenderIf, InputText, Button, FieldError, useNotification } from '@/components'
 import { useState } from 'react'
 import { LoginForm, formScheme, validationScheme } from './formSchema'
 import { useFormik } from 'formik'
+import { useAuth } from '@/resources'
+import { useRouter } from 'next/navigation'
+import { AccessToken, Credentials } from '@/resources/user/users.resources'
 
 export default function login() {
 
     const [loading, setLoading] = useState<boolean>(false);
     const [newUserState, setNewUserState] = useState<boolean>(false);
 
-    const { values, handleChange, handleSubmit, errors} = useFormik<LoginForm>({
+    const auth = useAuth();
+    const notification = useNotification();
+    const router = useRouter();
+
+    const { values, handleChange, handleSubmit, errors } = useFormik<LoginForm>({
         initialValues: formScheme,
         validationSchema: validationScheme,
         onSubmit: onSubmit
     })
 
-   async function onSubmit(values: LoginForm) {
-    console.log(values)
-   }
+    async function onSubmit(values: LoginForm) {
+        if (!newUserState) {
+            const credentials: Credentials = {
+                email: values.email,
+                password: values.password
+            }
+            try {
+                const accessToken: AccessToken = await auth.authenticate(credentials);
+                router.push("/galeria")
+            } catch (error: any) {
+                const message = error?.message;
+                notification.notify(message, 'error');
+            }
+        }
+    }
 
     return (
         <Template loading={loading}>
@@ -56,7 +75,7 @@ export default function login() {
                                 onChange={handleChange}
 
                             />
-                             <FieldError error={errors.email} />
+                            <FieldError error={errors.email} />
                         </div>
                         <div>
                             <label className='block text-sm font-medium leading-6 text-gray-900'>Senha: </label>
@@ -69,7 +88,7 @@ export default function login() {
                                 onChange={handleChange}
 
                             />
-                             <FieldError error={errors.password} />
+                            <FieldError error={errors.password} />
                         </div>
 
                         <RenderIf condition={newUserState}>
@@ -84,7 +103,7 @@ export default function login() {
                                     onChange={handleChange}
 
                                 />
-                                 <FieldError error={errors.passwordMatch} />
+                                <FieldError error={errors.passwordMatch} />
                             </div>
                         </RenderIf>
                         <div>
