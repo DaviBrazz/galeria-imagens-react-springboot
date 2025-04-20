@@ -1,6 +1,6 @@
 'use client'
 
-import { Button, InputText, Template, RenderIf, useNotification, FieldError } from '@/components'
+import { Button, InputText, Template, RenderIf, useNotification, FieldError, AuthenticatedPage } from '@/components'
 import { useImageService } from '@/resources/image/image.service'
 import { useFormik } from 'formik'
 import { useState } from 'react'
@@ -47,6 +47,7 @@ export default function FormularioPage() {
   }
 
   return (
+    <AuthenticatedPage> 
     <Template loading={loading}>
       <section className="flex flex-col items-center justify-center my-5">
         <h5 className="mt-3 mb-10 text-3xl font-extrabold tracking-tight text-gray-900">
@@ -131,5 +132,6 @@ export default function FormularioPage() {
         </form>
       </section>
     </Template>
+    </AuthenticatedPage>
   )
 }

@@ -1,6 +1,6 @@
 'use client'
 
-import { Template, ImageCard, Button, InputText, useNotification } from '@/components'
+import { Template, ImageCard, Button, InputText, useNotification, AuthenticatedPage } from '@/components'
 import { useState } from 'react'
 import { useImageService } from '@/resources'
 import { Image } from '@/resources/image/image.resource';
@@ -25,7 +25,7 @@ export default function GaleriaPage() {
         setImages(result);
         setLoading(false)
 
-        if(!result.length) {
+        if (!result.length) {
             notification.notify('Nenhum resultado encontrado', 'warning')
         }
     }
@@ -46,35 +46,36 @@ export default function GaleriaPage() {
     }
 
     return (
-      
-        <Template loading={loading}>
-            <section className="flex flex-col items-center justify-center my-5">
-                <div className="flex space-x-4">
-                    <InputText  placeholder="Pesquisar..." onChange={event => setQuery(event.target.value)} />
-                    <select onChange={event => setExtension(event.target.value)} className="border px-4 py-2 rounded-md text-gray-900">
-                        <option value="">Todos os formatos</option>
-                        <option value="PNG">PNG</option>
-                        <option value="JPEG">JPEG</option>
-                        <option value="GIF">GIF</option>
+        <AuthenticatedPage>
+            <Template loading={loading}>
+                <section className="flex flex-col items-center justify-center my-5">
+                    <div className="flex space-x-4">
+                        <InputText placeholder="Pesquisar..." onChange={event => setQuery(event.target.value)} />
+                        <select onChange={event => setExtension(event.target.value)} className="border px-4 py-2 rounded-md text-gray-900">
+                            <option value="">Todos os formatos</option>
+                            <option value="PNG">PNG</option>
+                            <option value="JPEG">JPEG</option>
+                            <option value="GIF">GIF</option>
 
 
-                    </select>
+                        </select>
 
-                    <Button style='bg-blue-500  hover:bg-blue-300' label='Buscar' onClick={searchImages}/>
-                    <Link href= "/formulario">
-                    <Button style='bg-green-500  hover:bg-green-300' label='Adicionar Nova'/>
-                    </Link>
+                        <Button style='bg-blue-500  hover:bg-blue-300' label='Buscar' onClick={searchImages} />
+                        <Link href="/formulario">
+                            <Button style='bg-green-500  hover:bg-green-300' label='Adicionar Nova' />
+                        </Link>
 
 
-                </div>
+                    </div>
 
-            </section>
-            <section className="grid grid-cols-4 gap-8">
-                {
-                    renderImageCards()
-                }
+                </section>
+                <section className="grid grid-cols-4 gap-8">
+                    {
+                        renderImageCards()
+                    }
 
-            </section>
-        </Template>
+                </section>
+            </Template>
+        </AuthenticatedPage>
     )
 }
