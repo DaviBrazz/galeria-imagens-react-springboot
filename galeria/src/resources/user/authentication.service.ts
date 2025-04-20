@@ -51,6 +51,29 @@ class AuthService {
     setUserSession(userSessionToken: UserSessionToken) {
         localStorage.setItem(AuthService.AUTH_PARAM, JSON.stringify(userSessionToken));
     }
+
+    getUserSession(): UserSessionToken | null {
+        const authString = localStorage.getItem(AuthService.AUTH_PARAM);
+        if (!authString) {
+            return null;
+        }
+        const token: UserSessionToken = JSON.parse(authString);
+        return token;
+    }
+
+    isSessionValid(): boolean {
+        const userSession: UserSessionToken | null = this.getUserSession();
+        if (!userSession) {
+            return false;
+        }
+
+        const expiration: number | undefined = userSession.expiration;
+        if (expiration) {
+            const expirationDateInMillis = expiration * 1000;
+            return new Date() < new Date(expirationDateInMillis);
+        }
+        return false;
+    }
 }
 
 export const useAuth = () => new AuthService();
