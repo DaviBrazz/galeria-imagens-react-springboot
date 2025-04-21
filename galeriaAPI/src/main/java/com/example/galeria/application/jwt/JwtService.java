@@ -2,7 +2,7 @@ package com.example.galeria.application.jwt;
 
 import com.example.galeria.domain.AccessToken;
 import com.example.galeria.domain.entity.User;
-import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,24 +18,25 @@ import java.util.Map;
 public class JwtService {
 
     private final SecretKeyGenerator keyGenerator;
+
     public AccessToken generateToken(User user) {
 
-        var key  = keyGenerator.getKey();
+        var key = keyGenerator.getKey();
         var expirationDate = generateExpirationDate();
         var claims = generateTokenClaims(user);
 
         String token = Jwts
-               .builder()
-               .signWith(key)
-               .subject(user.getEmail())
-               .expiration(expirationDate)
-               .claims(claims)
-               .compact();
+                .builder()
+                .signWith(key)
+                .subject(user.getEmail())
+                .expiration(expirationDate)
+                .claims(claims)
+                .compact();
 
         return new AccessToken(token);
     }
 
-    private Date generateExpirationDate(){
+    private Date generateExpirationDate() {
         var expirationMinutes = 60;
         LocalDateTime now = LocalDateTime.now().plusMinutes(expirationMinutes);
         return Date.from(now.atZone(ZoneId.systemDefault()).toInstant());
@@ -46,5 +47,19 @@ public class JwtService {
         claims.put("name", user.getName());
 
         return claims;
+    }
+
+    public String getEmailFromToken(String tokenJwt) {
+        try {
+            JwtParser build = Jwts.parser()
+                    .verifyWith(keyGenerator.getKey())
+                    .build();
+
+            Jws<Claims> jwsClaims = build.parseSignedClaims(tokenJwt);
+            Claims claims = jwsClaims.getPayload();
+            return claims.getSubject();
+        } catch (JwtException e) {
+            throw new InvalidTokenException(e.getMessage());
+        }
     }
 }
