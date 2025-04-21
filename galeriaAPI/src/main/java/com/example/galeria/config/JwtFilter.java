@@ -37,7 +37,7 @@ public class JwtFilter extends OncePerRequestFilter {
             } catch (InvalidTokenException e) {
                 log.error("Token inválido {}", e.getMessage());
             } catch (Exception e) {
-                log.error("Error na validação do token {}", e.getMessage());
+                log.error("Erro na validação do token {}", e.getMessage());
             }
         }
 
