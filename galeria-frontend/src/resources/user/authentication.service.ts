@@ -2,8 +2,17 @@ import { AccessToken, Credentials, User, UserSessionToken } from './users.resour
 import jwt from 'jwt-decode'
 
 class AuthService {
-    baseURL: string = 'http://localhost:8080/v1/users'
+    private readonly baseURL: string;
+
     static AUTH_PARAM: string = '_auth';
+
+    constructor() {
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+        if (!apiUrl) {
+            throw new Error('Variável NEXT_PUBLIC_API_URL não está definida!');
+        }
+        this.baseURL = `${apiUrl}/v1/users`;
+    }
 
     async authenticate(credentials: Credentials): Promise<AccessToken> {
         const response = await fetch(`${this.baseURL}/auth`, {
@@ -13,7 +22,7 @@ class AuthService {
                 'Content-Type': 'application/json'
             }
         });
-        if (response.status == 401) {
+        if (response.status === 401) {
             throw new Error('Usuário ou senha incorretos!');
         }
         return await response.json();
@@ -28,7 +37,7 @@ class AuthService {
             }
         });
 
-        if (response.status == 409) {
+        if (response.status === 409) {
             const responseError = await response.json();
             throw new Error(responseError.error);
         }
@@ -65,7 +74,7 @@ class AuthService {
 
         } catch (error) {
             return null;
-         }
+        }
     }
 
     isSessionValid(): boolean {
