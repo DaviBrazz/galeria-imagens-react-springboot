@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/images")
+@RequestMapping("/v1/images")
 @Slf4j
 @RequiredArgsConstructor
 public class ImagesController {

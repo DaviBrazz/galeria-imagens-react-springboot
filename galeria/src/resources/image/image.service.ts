@@ -2,7 +2,7 @@ import { Image } from './image.resource'
 import { useAuth } from '@/resources'
 
 class ImageService {
-    baseURL: string = 'http://192.168.1.7:8080/images';
+    baseURL: string = 'http://localhost:8080/v1/images';
     auth = useAuth();
 
     async buscar(query: string = "", extension: string = ""): Promise<Image[]> {

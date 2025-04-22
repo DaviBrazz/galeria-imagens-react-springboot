@@ -49,7 +49,7 @@ export default function FormularioPage() {
   return (
     <AuthenticatedPage> 
     <Template loading={loading}>
-      <section className="flex flex-col items-center justify-center my-5">
+      <section className="flex flex-col items-center justify-center my-5 text-gray-800">
         <h5 className="mt-3 mb-10 text-3xl font-extrabold tracking-tight text-gray-900">
           Nova Imagem
         </h5>
