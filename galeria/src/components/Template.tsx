@@ -1,6 +1,5 @@
 'use client'
 
-
 import { useAuth } from "@/resources";
 import Link from "next/link";
 import { useRouter } from "next/navigation";

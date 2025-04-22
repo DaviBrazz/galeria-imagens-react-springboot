@@ -16,7 +16,7 @@ import { useAuth } from '@/resources'
 import { useRouter } from 'next/navigation'
 import { AccessToken, Credentials, User } from '@/resources/user/users.resources'
 
-export default function Login() {
+export default function LoginPage() {
 
     const [loading, setLoading] = useState<boolean>(false);
     const [newUserState, setNewUserState] = useState<boolean>(false);
