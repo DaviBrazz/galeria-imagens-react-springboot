@@ -115,10 +115,10 @@ Confira algumas telas do frontend:
 
 ```bash
 # Clonar o repositório
-git clone https://github.com/DaviBrazz/galeria-imagens-react-springboot.git
+git clone https://github.com/DaviBrazz/galeria-nextjs-springboot.git
 
 # Entrar na pasta do projeto
-cd galeria-imagens-react-springboot
+cd galeria-nextjs-springboot
 
 # Subir os containers com Docker Compose
 docker-compose up --build
